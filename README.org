@@ -1,0 +1,4 @@
+* Rilo
+The kilo text editor, but in rust.
+
+Following [[https://viewsourcecode.org/snaptoken/kilo/03.rawInputAndOutput.html][this]] tutorial.
