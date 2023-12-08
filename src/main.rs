@@ -22,10 +22,13 @@ fn main() -> Result<(), std::io::Error> {
     let mut stdout = stdout.lock().into_raw_mode()?;
     let mut stdin = async_stdin().bytes();
 
-    write!(stdout,
-           "{}{}",
-           termion::clear::All,
-           termion::cursor::Goto(1, 1))?;
+    write!(
+        stdout,
+        "{}{}",
+        termion::clear::All,
+        termion::cursor::Goto(1, 1))?;
+
+    editor_rows(&mut stdout)?;
 
     loop {
         let commands = handle_input(&mut stdin);
@@ -59,4 +62,11 @@ fn handle_input(stdin: &mut Bytes<AsyncReader>) -> Vec<Action> {
     }
 
     out
+}
+
+fn editor_rows(stdout: &mut RawTerminal<StdoutLock>) -> Result<(), std::io::Error> {
+    for i in 0..24 {
+        write!(stdout, "~\r\n")?;
+    }
+    Ok(())
 }
